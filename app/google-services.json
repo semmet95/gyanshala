@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1078208466718",
+    "firebase_url": "https://gyanshala-hackathon.firebaseio.com",
+    "project_id": "gyanshala-hackathon",
+    "storage_bucket": "gyanshala-hackathon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078208466718:android:014e060d0d6a85c3",
+        "android_client_info": {
+          "package_name": "com.apps.devamit.gyanshala"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078208466718-mr44gcmlsnnurh421p47n5l5t279tvka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABTjn1mblBc1b3e72v3YflzX1RtU03VMQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
