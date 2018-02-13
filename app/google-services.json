@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1078208466718-8p0vtjnebh3rcqhmnv5k0rcdgq96cpc7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apps.devamit.gyanshala",
+            "certificate_hash": "e517dacf77d85d5df6b196d2afdb287ca3a546ba"
+          }
+        },
+        {
           "client_id": "1078208466718-mr44gcmlsnnurh421p47n5l5t279tvka.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078208466718-mr44gcmlsnnurh421p47n5l5t279tvka.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
