@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+<item android:title="Dashboard"></item>
+<item android:title="something"></item>
+<item android:title="someone"></item>
+<item android:title="somehow"></item>
 </menu>
