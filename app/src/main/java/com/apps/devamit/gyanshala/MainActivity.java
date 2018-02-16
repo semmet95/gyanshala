@@ -82,6 +82,14 @@ public class MainActivity extends AppCompatActivity {
         headerImageView=nav_header_main.findViewById(R.id.userImage);
         navigationView.addHeaderView(nav_header_main);
 
+        //adding listeners to items in navigation drawer
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return false;
+            }
+        });
+
         thisUser=FirebaseAuth.getInstance().getCurrentUser();
         //if this User==null the user hasn't signed in even once
         if(thisUser==null) {
