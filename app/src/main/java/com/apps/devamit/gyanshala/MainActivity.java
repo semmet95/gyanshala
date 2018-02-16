@@ -6,12 +6,16 @@ import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,7 +36,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -45,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageView headerImageView;
 
     private static final int RC_SIGN_IN = 123, RC_GOOGLE_DETAILS=234;
+    private static final String[] action_titles={"My Feed", "My Questions", "My Answers", "Government things"};
     private SharedPreferences sharedPreferences;
 
     private static FirebaseUser thisUser;
-    private DatabaseReference mDatabase;
     List<AuthUI.IdpConfig> providers = Collections.singletonList(
             new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
 
@@ -81,11 +84,29 @@ public class MainActivity extends AppCompatActivity {
         nav_header_main=getLayoutInflater().inflate(R.layout.nav_header_main, navigationView, false);
         headerImageView=nav_header_main.findViewById(R.id.userImage);
         navigationView.addHeaderView(nav_header_main);
+        navigationView.setCheckedItem(R.id.myFeed);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MyFeedFragment()).commit();
+        actionBar.setTitle(action_titles[0]);
 
         //adding listeners to items in navigation drawer
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                mDrawerLayout.closeDrawer(Gravity.START);
+                navigationView.setCheckedItem(item.getItemId());
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                if(item.getItemId()==R.id.signOut) {
+                    FirebaseAuth.getInstance().signOut();
+                } else if(item.getItemId()==R.id.signIn)
+                    startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
+                            .setAvailableProviders(providers)
+                            .setLogo(R.mipmap.ic_launcher_round)
+                            .build(), RC_SIGN_IN);
+                else if(item.getItemId()==R.id.myQuestions) {
+                    actionBar.setTitle(action_titles[1]);
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, new MyQuestionsFragment()).commit();
+                    return true;
+                }
                 return false;
             }
         });
@@ -139,6 +160,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.actionbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onPostCreate(savedInstanceState, persistentState);
         mDrawerToggle.syncState();
@@ -148,6 +176,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mDrawerToggle.onOptionsItemSelected(item))
             return true;
+        if(item.getItemId()==R.id.addQuestion) {
+            if(FirebaseAuth.getInstance().getCurrentUser()==null) {
+                Toast.makeText(this, "You need to login first", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(this, AddQuestionActivity.class);
+                startActivity(intent);
+            }
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -169,13 +206,18 @@ public class MainActivity extends AppCompatActivity {
             if (result.isSuccess()) {
                 GoogleSignInAccount acct = result.getSignInAccount();
                 // Get account information
-                String PhotoUrl = acct.getPhotoUrl().toString();
-                Log.e("google details :", "in google details's with photo url = "+PhotoUrl);
-                SharedPreferences.Editor editor=sharedPreferences.edit();
-                editor.putString("imageurl", PhotoUrl);
-                editor.apply();
-                headerImageView.setBackground(null);
-                Glide.with(this).load(PhotoUrl).into(headerImageView);
+                if(acct.getPhotoUrl()!=null) {
+                    String PhotoUrl = acct.getPhotoUrl().toString();
+                    Log.e("google details :", "in google details's with photo url = " + PhotoUrl);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("imageurl", PhotoUrl);
+                    editor.apply();
+                    headerImageView.setBackground(null);
+                    Glide.with(this).load(PhotoUrl).into(headerImageView);
+                } else {
+                    Log.e("photo :", "photo not added to the account");
+                    //Photo not added to the account case
+                }
             } else
                 Log.e("google details :", "failed to get photo");
         }

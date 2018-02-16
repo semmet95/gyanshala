@@ -1,0 +1,16 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.apps.devamit.gyanshala.MyFeedFragment">
+
+    <LinearLayout
+        android:id="@+id/questioncontainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+        <!--The UI has to be populated programmatically-->
+
+    </LinearLayout>
+</ScrollView>

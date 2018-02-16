@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<item android:title="My Feed"></item>
-<item android:title="My Questions"></item>
-<item android:title="My Answers"></item>
-<item android:title="Government Schemes and things to add"></item>
+<item android:title="Sign in"
+    android:id="@+id/signIn" />
+<item android:title="My Feed"
+    android:id="@+id/myFeed"/>
+<item android:title="My Questions"
+    android:id="@+id/myQuestions"/>
+<item android:title="My Answers"
+    android:id="@+id/myAnswers"/>
+<item android:title="Government Schemes and things to add" />
+<item android:title="Sign Out"
+    android:id="@+id/signOut"/>
 </menu>
