@@ -123,6 +123,10 @@ public class MainActivity extends AppCompatActivity {
                     actionBar.setTitle(action_titles[1]);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new MyQuestionsFragment(), "current_fragment").commit();
                     return true;
+                } else if(item.getItemId()==R.id.myAnswers) {
+                    actionBar.setTitle(action_titles[2]);
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, new MyAnswersFragment(), "current_fragment").commit();
+                    return true;
                 } else if(item.getItemId()==R.id.scholarships) {
                     actionBar.setTitle(action_titles[3]);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new ScholarshipFragment(), "current_fragment").commit();
