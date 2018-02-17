@@ -4,5 +4,8 @@
     <string name="drawer_closed">drawer closed</string>
     <string name="drawer_opened">drawer opened</string>
 
+    <string name="submit_answer_hint">Write your answer</string>
 
+    <string name="submit_answer">Submit Answer</string>
+    <string name="answer">Answer</string>
 </resources>

@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddQuestionActivity" />
-        <activity android:name=".QuestionWithAnswers"></activity>
+        <activity android:name=".QuestionWithAnswers" />
+        <activity android:name=".AnswerActicity"></activity>
     </application>
 
 </manifest>

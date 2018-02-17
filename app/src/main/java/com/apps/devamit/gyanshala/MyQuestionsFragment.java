@@ -26,4 +26,9 @@ public class MyQuestionsFragment extends Fragment {
         mRecyclerView.setAdapter(new MyQuestionsAdapter());
         return layout;
     }
+
+    void refreshUI() {
+        mRecyclerView.removeAllViews();
+        mRecyclerView.setAdapter(new MyQuestionsAdapter());
+    }
 }

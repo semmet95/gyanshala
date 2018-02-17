@@ -175,7 +175,8 @@ public class MainActivity extends AppCompatActivity {
         if(currFragment instanceof MyFeedFragment) {
             Log.e("instance is :", "true");
             ((MyFeedFragment) currFragment).refreshUI();
-        }
+        } else if(currFragment instanceof MyQuestionsFragment)
+            ((MyQuestionsFragment)currFragment).refreshUI();
     }
 
     @Override

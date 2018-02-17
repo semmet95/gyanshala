@@ -21,11 +21,20 @@
         android:layout_below="@+id/questionTitleWithAnswers"
         android:id="@+id/questionDetailsWithAnswers"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_below="@id/questionDetailsWithAnswers"
+        android:text="@string/answer"
+        android:id="@+id/answerbutton"
+        android:onClick="answerclicked"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/allAnswers"
         android:scrollbars="vertical"
         android:padding="5dp"
-        android:layout_below="@+id/questionDetailsWithAnswers"
+        android:layout_below="@+id/answerbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
