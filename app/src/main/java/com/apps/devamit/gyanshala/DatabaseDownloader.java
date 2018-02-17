@@ -62,7 +62,7 @@ class DatabaseDownloader {
                                         ArrayList<String> ansList = quesAnswers.get(ques[0] + " " + ques[1]);
                                         if (ansList == null)
                                             ansList = new ArrayList<>();
-                                        ansList.add(ans);
+                                        ansList.add(ans+"\n\n-"+answer.user_id);
                                         quesAnswers.put(ques[0] + " " + ques[1], ansList);
                                     }
                                 }

@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
     void refreshUI() {
         Log.e("main activity :", "here in refresh UI");
-        Fragment currFragment=(MyFeedFragment)getSupportFragmentManager().findFragmentByTag("current_fragment");
+        Fragment currFragment=getSupportFragmentManager().findFragmentByTag("current_fragment");
         if(currFragment instanceof MyFeedFragment) {
             Log.e("instance is :", "true");
             ((MyFeedFragment) currFragment).refreshUI();

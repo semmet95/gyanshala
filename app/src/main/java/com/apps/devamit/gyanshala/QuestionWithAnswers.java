@@ -1,10 +1,13 @@
 package com.apps.devamit.gyanshala;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -31,12 +34,35 @@ public class QuestionWithAnswers extends AppCompatActivity {
         ans=DatabaseDownloader.quesAnswers.get(title+" "+details);
         allAnswers.setLayoutManager(new LinearLayoutManager(this));
         allAnswers.setAdapter(new QuestionsWithAnswersAdapter(ans));
+
+        ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+        }
     }
 
     public void answerclicked(View v) {
         Intent intent=new Intent(this, AnswerActicity.class);
         intent.putExtra("title", title);
         intent.putExtra("details", details);
-        startActivity(intent);
+        startActivityForResult(intent, 11);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==11) {
+            allAnswers.setAdapter(new QuestionsWithAnswersAdapter(DatabaseDownloader.quesAnswers.get(title + " " + details)));
+        }
     }
 }

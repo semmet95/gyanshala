@@ -39,6 +39,7 @@ public class AddQuestionActivity extends AppCompatActivity {
                     String user_id=FirebaseAuth.getInstance().getCurrentUser().getEmail();
                     user_id=user_id.substring(0, user_id.indexOf('@'));
                     myref.child(qid).setValue(new QuestionChildren("null", user_id, qid, title, details));
+                    DatabaseDownloader.refresh();
                     finish();
                 }
             }
