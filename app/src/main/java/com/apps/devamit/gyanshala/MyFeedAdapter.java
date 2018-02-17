@@ -40,6 +40,7 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedViewHolders> {
     public int getItemCount() {
         //DatabaseDownloader.refresh();
         //Log.e("item count :", ""+DatabaseDownloader.questionTitleList.size());
+        Log.e("questionTitlesize :", " = "+DatabaseDownloader.questionTitleList.size());
         return DatabaseDownloader.questionTitleList.size();
     }
 }

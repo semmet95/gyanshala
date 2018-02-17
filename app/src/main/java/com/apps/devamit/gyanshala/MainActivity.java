@@ -107,12 +107,12 @@ public class MainActivity extends AppCompatActivity {
                             .setAvailableProviders(providers)
                             .setLogo(R.mipmap.ic_launcher_round)
                             .build(), RC_SIGN_IN);
-                else if(item.getItemId()==R.id.myFeed&&!item.isChecked()) {
+                else if(item.getItemId()==R.id.myFeed) {
                     actionBar.setTitle(action_titles[0]);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new MyFeedFragment(), "current_fragment").commit();
                     return true;
                 }
-                else if(item.getItemId()==R.id.myQuestions&&!item.isChecked()) {
+                else if(item.getItemId()==R.id.myQuestions) {
                     actionBar.setTitle(action_titles[1]);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new MyQuestionsFragment(), "current_fragment").commit();
                     return true;
@@ -149,9 +149,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("gyanshala-hackathon");
         myRef.setValue("hope it works 2");
-
-        DatabaseDownloader.obj=this;
-        DatabaseDownloader.refresh();
     }
 
     public void loadGoogleUserDetails() {

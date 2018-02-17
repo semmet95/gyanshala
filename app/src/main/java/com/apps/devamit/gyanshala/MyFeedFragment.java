@@ -36,6 +36,7 @@ public class MyFeedFragment extends Fragment {
 
     void refreshUI() {
         Log.e("myfeedfragment :", "here in refresh UI");
+        mRecyclerView.removeAllViews();
         mRecyclerView.setAdapter(new MyFeedAdapter());
     }
 }

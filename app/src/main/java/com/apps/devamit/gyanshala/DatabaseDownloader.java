@@ -17,15 +17,15 @@ class DatabaseDownloader {
     static ArrayList<String> questionTitleList=new ArrayList<>(), questionDescriptionList=new ArrayList<>();
     static MainActivity obj;
     static void refresh() {
-        quesMetadata.clear();
-        quesAnswers.clear();
-        questionTitleList.clear();
-        questionDescriptionList.clear();
         final FirebaseDatabase mDatabase=FirebaseDatabase.getInstance();
         DatabaseReference refq=mDatabase.getReference("Questions");
         refq.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                quesMetadata.clear();
+                quesAnswers.clear();
+                questionTitleList.clear();
+                questionDescriptionList.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
                     QuestionChildren question=snapshot.getValue(QuestionChildren.class);
                     Log.e("in question :", snapshot.getKey());
