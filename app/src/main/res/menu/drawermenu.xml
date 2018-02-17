@@ -3,16 +3,17 @@
 
     <group
         android:checkableBehavior="single">
-        <item android:title="Sign in"
+        <item android:title="@string/sign_in"
             android:id="@+id/signIn" />
-        <item android:title="My Feed"
+        <item android:title="@string/my_feed"
             android:id="@+id/myFeed"/>
-        <item android:title="My Questions"
+        <item android:title="@string/my_questions"
             android:id="@+id/myQuestions"/>
-        <item android:title="My Answers"
+        <item android:title="@string/my_answers"
             android:id="@+id/myAnswers"/>
-        <item android:title="Government Schemes and things to add" />
-        <item android:title="Sign Out"
+        <item android:title="@string/scholarships"
+            android:id="@+id/scholarships"/>
+        <item android:title="@string/sign_out"
             android:id="@+id/signOut"/>
     </group>
 </menu>
