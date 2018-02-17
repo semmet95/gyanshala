@@ -10,7 +10,7 @@
         android:layout_height="150dp"
         android:scaleType="centerInside"
         android:padding="5dp"
-        android:background="@mipmap/ic_launcher"
+        android:background="@mipmap/ic_default_profile"
         android:layout_gravity="center"
         android:id="@+id/userImage"/>
 

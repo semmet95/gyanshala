@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView headerImageView;
 
     private static final int RC_SIGN_IN = 123, RC_GOOGLE_DETAILS=234;
-    private static final String[] action_titles={"My Feed", "My Questions", "My Answers", "Government things"};
+    private static final String[] action_titles={"My Feed", "My Questions", "My Answers", "Scholarships"};
     private SharedPreferences sharedPreferences;
 
     private static FirebaseUser thisUser;
@@ -117,10 +117,13 @@ public class MainActivity extends AppCompatActivity {
                     actionBar.setTitle(action_titles[0]);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new MyFeedFragment(), "current_fragment").commit();
                     return true;
-                }
-                else if(item.getItemId()==R.id.myQuestions) {
+                } else if(item.getItemId()==R.id.myQuestions) {
                     actionBar.setTitle(action_titles[1]);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new MyQuestionsFragment(), "current_fragment").commit();
+                    return true;
+                } else if(item.getItemId()==R.id.scholarships) {
+                    actionBar.setTitle(action_titles[3]);
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, new ScholarshipFragment(), "current_fragment");
                     return true;
                 }
                 return false;
