@@ -40,6 +40,7 @@ class DatabaseDownloader {
                     metadatas.add(question.ans_id);
                     Log.e("putting key :", "as "+ques[0]+" and "+ques[1]);
                     quesMetadata.put(ques[0]+" "+ques[1], metadatas);
+                    Log.e("reading databse :", "the read database has ans_id = "+question.ans_id);
                     if(!question.ans_id.equals("null")) {
                         for(String x: question.ans_id.split(" ")) {
                             DatabaseReference refa=mDatabase.getReference("Answers").child(x);

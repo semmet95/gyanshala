@@ -21,10 +21,14 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedViewHolders> {
         Log.e("onBind :", "here in");
         holder.questioncardtitle.setText(DatabaseDownloader.questionTitleList.get(position));
         holder.questioncarddetails.setText(DatabaseDownloader.questionDescriptionList.get(position));
+        String ans_id=DatabaseDownloader.quesMetadata.get(DatabaseDownloader.questionTitleList.get(position)+
+                " "+DatabaseDownloader.questionDescriptionList.get(position)).get(2);
+        if(ans_id.equals("null"))
+            ans_id="0 answers";
+        else
+            ans_id=ans_id.split(" ").length+" answers";
         Log.e("feedadapter :", "getting with key "+DatabaseDownloader.questionTitleList.get(position)+" and "+DatabaseDownloader.questionDescriptionList.get(position));
-        holder.answernums.setText(DatabaseDownloader.quesMetadata.get(DatabaseDownloader.questionTitleList.get(position)+
-                " "+DatabaseDownloader.questionDescriptionList.get(position))
-                .get(2).split(" ").length+" answers");
+        holder.answernums.setText(ans_id);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
