@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DatabaseDownloader.refresh();
+
         sharedPreferences=getSharedPreferences("gyanshalaprefs", MODE_PRIVATE);
         mDrawerLayout= findViewById(R.id.drawer_layout);
         mDrawerToggle=new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_opened, R.string.drawer_closed) {

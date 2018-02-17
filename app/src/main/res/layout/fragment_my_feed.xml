@@ -4,13 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.apps.devamit.gyanshala.MyFeedFragment">
 
-    <LinearLayout
-        android:id="@+id/feedcontainer"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/questiononlyrecycler"
+        android:scrollbars="vertical"
+        android:padding="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
-        <!--The UI has to be populated programmatically-->
-
-    </LinearLayout>
+        android:layout_height="wrap_content"/>
 </ScrollView>
