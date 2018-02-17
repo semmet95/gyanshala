@@ -13,16 +13,21 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/splashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddQuestionActivity" />
-        <activity android:name=".QuestionWithAnswers" />
-        <activity android:name=".AnswerActicity"></activity>
+        <activity android:name=".AddQuestionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".QuestionWithAnswers"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".AnswerActicity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
