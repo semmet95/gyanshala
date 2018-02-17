@@ -14,7 +14,7 @@
         android:id="@+id/questionTitle"
         android:layout_marginBottom="10dp"
         android:layout_weight="0"
-        android:hint="Add a title to the question"/>
+        android:hint="@string/add_a_title_to_the_question"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
         android:id="@+id/questionDetails"
         android:gravity="top"
         android:layout_weight="1"
-        android:hint="Add the details"/>
+        android:hint="@string/add_the_details"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
         android:id="@+id/addButton"
         android:layout_marginTop="10dp"
         android:layout_weight="0"
-        android:text="Add"
+        android:text="@string/add"
         android:layout_gravity="end"/>
 
 </LinearLayout>

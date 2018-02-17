@@ -41,8 +41,6 @@ public class My_adaptor extends RecyclerView.Adapter<My_adaptor.ViewHolder> {
         else
             holder.due_date.setTextColor(rgb(0,100,0));
 
-
-
         holder.help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,8 +50,6 @@ public class My_adaptor extends RecyclerView.Adapter<My_adaptor.ViewHolder> {
 
             }
         });
-
-
     }
 
     @Override

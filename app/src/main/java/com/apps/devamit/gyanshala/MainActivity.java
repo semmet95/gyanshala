@@ -108,12 +108,14 @@ public class MainActivity extends AppCompatActivity {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 if(item.getItemId()==R.id.signOut) {
                     FirebaseAuth.getInstance().signOut();
-                } else if(item.getItemId()==R.id.signIn)
+                    item.setCheckable(false);
+                } else if(item.getItemId()==R.id.signIn) {
                     startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
                             .setAvailableProviders(providers)
                             .setLogo(R.mipmap.ic_launcher_round)
                             .build(), RC_SIGN_IN);
-                else if(item.getItemId()==R.id.myFeed) {
+                    item.setCheckable(false);
+                } else if(item.getItemId()==R.id.myFeed) {
                     actionBar.setTitle(action_titles[0]);
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new MyFeedFragment(), "current_fragment").commit();
                     return true;
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 } else if(item.getItemId()==R.id.scholarships) {
                     actionBar.setTitle(action_titles[3]);
-                    fragmentManager.beginTransaction().replace(R.id.content_frame, new ScholarshipFragment(), "current_fragment");
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, new ScholarshipFragment(), "current_fragment").commit();
                     return true;
                 }
                 return false;
