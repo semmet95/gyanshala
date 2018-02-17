@@ -6,6 +6,7 @@ import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DatabaseDownloader.obj=this;
         DatabaseDownloader.refresh();
 
         sharedPreferences=getSharedPreferences("gyanshalaprefs", MODE_PRIVATE);
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         headerImageView=nav_header_main.findViewById(R.id.userImage);
         navigationView.addHeaderView(nav_header_main);
         navigationView.setCheckedItem(R.id.myFeed);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MyFeedFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new MyFeedFragment(), "current_fragment").commit();
         actionBar.setTitle(action_titles[0]);
 
         //adding listeners to items in navigation drawer
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                             .build(), RC_SIGN_IN);
                 else if(item.getItemId()==R.id.myQuestions) {
                     actionBar.setTitle(action_titles[1]);
-                    fragmentManager.beginTransaction().replace(R.id.content_frame, new MyQuestionsFragment()).commit();
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, new MyQuestionsFragment(), "current_fragment").commit();
                     return true;
                 }
                 return false;
@@ -160,6 +162,15 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_GOOGLE_DETAILS);
+    }
+
+    void refreshUI() {
+        Log.e("main activity :", "here in refresh UI");
+        Fragment currFragment=(MyFeedFragment)getSupportFragmentManager().findFragmentByTag("current_fragment");
+        if(currFragment instanceof MyFeedFragment) {
+            Log.e("instance is :", "true");
+            ((MyFeedFragment) currFragment).refreshUI();
+        }
     }
 
     @Override

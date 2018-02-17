@@ -19,7 +19,7 @@ public class MyFeedViewHolders extends RecyclerView.ViewHolder {
     public MyFeedViewHolders(View itemView) {
         super(itemView);
         questioncardtitle=itemView.findViewById(R.id.questioncardtitle);
-        questioncarddetails=itemView.findViewById(R.id.questionDetails);
+        questioncarddetails=itemView.findViewById(R.id.questioncarddetails);
         answernums=itemView.findViewById(R.id.answernums);
     }
 }

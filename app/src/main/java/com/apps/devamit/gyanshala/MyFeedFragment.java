@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,10 +27,15 @@ public class MyFeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View layout= inflater.inflate(R.layout.fragment_my_feed, container, false);
+        Log.e("myfeedfragment :", "here in");
         mRecyclerView=layout.findViewById(R.id.questiononlyrecycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(new MyFeedAdapter());
         return layout;
     }
 
+    void refreshUI() {
+        Log.e("myfeedfragment :", "here in refresh UI");
+        mRecyclerView.setAdapter(new MyFeedAdapter());
+    }
 }
