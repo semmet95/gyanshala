@@ -4,4 +4,7 @@
     <item android:id="@+id/addQuestion"
         android:title="Add"
         app:showAsAction="always" />
+    <item android:id="@+id/refresh"
+        android:title="refresh"
+        app:showAsAction="never" />
 </menu>

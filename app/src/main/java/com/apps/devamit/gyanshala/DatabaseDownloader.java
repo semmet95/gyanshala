@@ -12,11 +12,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 class DatabaseDownloader {
-    static HashMap<String[], ArrayList<String>> quesMetadata=new HashMap<>(),
+    static HashMap<String, ArrayList<String>> quesMetadata=new HashMap<>(),
             quesAnswers=new HashMap<>();
     static ArrayList<String> questionTitleList=new ArrayList<>(), questionDescriptionList=new ArrayList<>();
     static MainActivity obj;
     static void refresh() {
+        quesMetadata.clear();
+        quesAnswers.clear();
+        questionTitleList.clear();
+        questionDescriptionList.clear();
         final FirebaseDatabase mDatabase=FirebaseDatabase.getInstance();
         DatabaseReference refq=mDatabase.getReference("Questions");
         refq.addValueEventListener(new ValueEventListener() {
@@ -35,7 +39,7 @@ class DatabaseDownloader {
                     metadatas.add(question.user_id);
                     metadatas.add(question.ans_id);
                     Log.e("putting key :", "as "+ques[0]+" and "+ques[1]);
-                    quesMetadata.put(ques, metadatas);
+                    quesMetadata.put(ques[0]+" "+ques[1], metadatas);
                     if(!question.ans_id.equals("null")) {
                         for(String x: question.ans_id.split(" ")) {
                             DatabaseReference refa=mDatabase.getReference("Answers").child(x);
@@ -45,11 +49,11 @@ class DatabaseDownloader {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     AnswerChildren answer=dataSnapshot.getValue(AnswerChildren.class);
                                     String ans=answer.answer+"\n\n"+"- "+answer.user_id+"@gmail.com";
-                                    ArrayList<String> ansList=quesAnswers.get(ques);
+                                    ArrayList<String> ansList=quesAnswers.get(ques[0]+" "+ques[1]);
                                     if(ansList==null)
                                         ansList=new ArrayList<>();
                                     ansList.add(ans);
-                                    quesAnswers.put(ques, ansList);
+                                    quesAnswers.put(ques[0]+" "+ques[1], ansList);
                                 }
 
                                 @Override

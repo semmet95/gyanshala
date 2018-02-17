@@ -18,12 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
+        android:layout_below="@+id/questionTitleWithAnswers"
         android:id="@+id/questionDetailsWithAnswers"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/allAnswers"
         android:scrollbars="vertical"
         android:padding="5dp"
+        android:layout_below="@+id/questionDetailsWithAnswers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
