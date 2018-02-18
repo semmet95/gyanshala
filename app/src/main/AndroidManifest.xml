@@ -28,6 +28,9 @@
         <activity
             android:name=".AnswerActicity"
             android:screenOrientation="portrait" />
+
+        <service android:name=".Notificator" />
+        <service android:name=".Messager" />
     </application>
 
 </manifest>

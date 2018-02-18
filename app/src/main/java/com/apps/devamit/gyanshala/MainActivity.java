@@ -205,6 +205,8 @@ public class MainActivity extends AppCompatActivity {
             ((MyFeedFragment) currFragment).refreshUI();
         } else if(currFragment instanceof MyQuestionsFragment)
             ((MyQuestionsFragment)currFragment).refreshUI();
+        else if(currFragment instanceof MyAnswersFragment)
+            ((MyAnswersFragment)currFragment).refreshUI();
     }
 
     @Override
