@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">ज्ञानशाला</string>
+
+    <string name="drawer_closed">दराज बंद</string>
+    <string name="drawer_opened">दराज खुला</string>
+
+    <string name="submit_answer_hint">अपना जबाब लिखें</string>
+
+    <string name="submit_answer">उत्तर भेजें</string>
+    <string name="answer">उत्तर</string>
+    <string name="sign_in">साइन इन करें</string>
+    <string name="my_feed">मेरा लेखा जोखा</string>
+    <string name="my_questions">मेरे सवाल</string>
+    <string name="my_answers">मेरे उत्तर</string>
+    <string name="scholarships">छात्रवृत्ति</string>
+    <string name="sign_out">साइन आउट</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">नमस्ते रिक्त टुकड़ा</string>
+    <string name="add_a_title_to_the_question">प्रश्न के लिए एक शीर्षक जोड़ें</string>
+    <string name="add_the_details">विवरण जोड़ें</string>
+    <string name="add">जोड़ें</string>
+    <string name="mr_guest">श्री अतिथि</string>
+    <string name="refresh">पुनःप्राप्ति</string>
+    <string name="language">भाषा</string>
+</resources>

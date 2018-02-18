@@ -2,9 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
     <item android:id="@+id/addQuestion"
-        android:title="Add"
-        app:showAsAction="always" />
+        android:title="@string/add"
+        app:showAsAction="ifRoom" />
     <item android:id="@+id/refresh"
-        android:title="refresh"
+        android:title="@string/refresh"
+        android:orderInCategory="3"
+        app:showAsAction="never" />
+    <item android:id="@+id/language"
+        android:title="@string/language"
+        android:orderInCategory="4"
         app:showAsAction="never" />
 </menu>

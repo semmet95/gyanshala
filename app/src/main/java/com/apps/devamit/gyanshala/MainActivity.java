@@ -1,7 +1,10 @@
 package com.apps.devamit.gyanshala;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,13 +16,17 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,8 +44,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -49,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView headerImageView;
 
     private static final int RC_SIGN_IN = 123, RC_GOOGLE_DETAILS=234;
-    private static final String[] action_titles={"My Feed", "My Questions", "My Answers", "Scholarships"};
+    private String[] action_titles;
     private SharedPreferences sharedPreferences;
 
     private static FirebaseUser thisUser;
@@ -66,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        action_titles=new String[]{getResources().getString(R.string.my_feed),
+                getResources().getString(R.string.my_questions), getResources().getString(R.string.my_answers),
+                getResources().getString(R.string.scholarships)};
 
         DatabaseDownloader.obj=this;
         DatabaseDownloader.refresh();
@@ -167,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadGoogleUserDetails() {
-        Log.e("google details :", "trying to get google details");
+        //Log.e("google details :", "trying to get google details");
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -175,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                 .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        Log.e("onConnectionFailed :", "connection failure at trying to download image");
+                        //Log.e("onConnectionFailed :", "connection failure at trying to download image");
                     }
                 })
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
@@ -185,10 +198,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void refreshUI() {
-        Log.e("main activity :", "here in refresh UI");
+        //Log.e("main activity :", "here in refresh UI");
         Fragment currFragment=getSupportFragmentManager().findFragmentByTag("current_fragment");
         if(currFragment instanceof MyFeedFragment) {
-            Log.e("instance is :", "true");
+            //Log.e("instance is :", "true");
             ((MyFeedFragment) currFragment).refreshUI();
         } else if(currFragment instanceof MyQuestionsFragment)
             ((MyQuestionsFragment)currFragment).refreshUI();
@@ -223,6 +236,64 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId()==R.id.refresh) {
             DatabaseDownloader.obj=this;
             DatabaseDownloader.refresh();
+            return true;
+        }
+        if(item.getItemId()==R.id.language) {
+
+            final Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.radiobutton_dialog);
+
+            List<String> stringList=new ArrayList<>();  // here is list
+            stringList.add("Hindi");
+            stringList.add("English");
+            RadioGroup rg = dialog.findViewById(R.id.radio_group);
+
+            for(int i=0;i<stringList.size();i++){
+                RadioButton rb=new RadioButton(this); // dynamically creating RadioButton and adding to RadioGroup.
+                rb.setId(i);
+                rb.setText(stringList.get(i));
+                rg.addView(rb);
+            }
+            rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    dialog.dismiss();
+                    //Log.e("checked :", "checkId = "+checkedId);
+                    if(checkedId==0) {
+                        //user selected hindi
+                        Locale myLocale = new Locale("hi");
+                        Resources res = getResources();
+                        DisplayMetrics dm = res.getDisplayMetrics();
+                        Configuration conf = res.getConfiguration();
+                        conf.locale = myLocale;
+                        res.updateConfiguration(conf, dm);
+                        /*Intent refresh = new Intent(dialog.getContext(), MainActivity.class);
+                        startActivity(refresh);
+                        finish();*/
+                    } else {
+                        //user selected english
+                        Locale myLocale = new Locale("en");
+                        Resources res = getResources();
+                        DisplayMetrics dm = res.getDisplayMetrics();
+                        Configuration conf = res.getConfiguration();
+                        conf.locale = myLocale;
+                        res.updateConfiguration(conf, dm);
+                        /*Intent refresh = new Intent(dialog.getContext(), MainActivity.class);
+                        startActivity(refresh);
+                        finish();*/
+                    }
+                    /*DatabaseDownloader.quesMetadata.clear();
+                    DatabaseDownloader.quesAnswers.clear();
+                    DatabaseDownloader.questionTitleList.clear();
+                    DatabaseDownloader.questionDescriptionList.clear();
+                    DatabaseDownloader.myQuestionTitleList.clear();
+                    DatabaseDownloader.myQuestionDescriptionList.clear();*/
+                    recreate();
+                }
+            });
+            dialog.show();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -247,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
                 // Get account information
                 if(acct.getPhotoUrl()!=null) {
                     String PhotoUrl = acct.getPhotoUrl().toString();
-                    Log.e("google details :", "in google details's with photo url = " + PhotoUrl);
+                    //Log.e("google details :", "in google details's with photo url = " + PhotoUrl);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("imageurl", PhotoUrl);
                     editor.apply();
@@ -255,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
                     headerImageView.setBackground(null);
                     Glide.with(this).load(PhotoUrl).into(headerImageView);
                 } else {
-                    Log.e("photo :", "photo not added to the account");
+                    //Log.e("photo :", "photo not added to the account");
                     //Photo not added to the account case
                 }
             } else

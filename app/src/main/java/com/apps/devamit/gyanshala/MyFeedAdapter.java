@@ -11,14 +11,14 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedViewHolders> {
 
     @Override
     public MyFeedViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.e("oncreateholder :", "here in");
+        //Log.e("oncreateholder :", "here in");
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.questioncard, parent, false);
         return new MyFeedViewHolders(view);
     }
 
     @Override
     public void onBindViewHolder(final MyFeedViewHolders holder, int position) {
-        Log.e("onBind :", "here in");
+        //Log.e("onBind :", "here in");
         holder.questioncardtitle.setText(DatabaseDownloader.questionTitleList.get(position));
         holder.questioncarddetails.setText(DatabaseDownloader.questionDescriptionList.get(position));
         String ans_id=DatabaseDownloader.quesMetadata.get(DatabaseDownloader.questionTitleList.get(position)+
@@ -27,7 +27,7 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedViewHolders> {
             ans_id="0 answers";
         else
             ans_id=ans_id.split(" ").length+" answers";
-        Log.e("feedadapter :", "getting with key "+DatabaseDownloader.questionTitleList.get(position)+" and "+DatabaseDownloader.questionDescriptionList.get(position));
+        //Log.e("feedadapter :", "getting with key "+DatabaseDownloader.questionTitleList.get(position)+" and "+DatabaseDownloader.questionDescriptionList.get(position));
         holder.answernums.setText(ans_id);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +44,7 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedViewHolders> {
     public int getItemCount() {
         //DatabaseDownloader.refresh();
         //Log.e("item count :", ""+DatabaseDownloader.questionTitleList.size());
-        Log.e("questionTitlesize :", " = "+DatabaseDownloader.questionTitleList.size());
+        //Log.e("questionTitlesize :", " = "+DatabaseDownloader.questionTitleList.size());
         return DatabaseDownloader.questionTitleList.size();
     }
 }

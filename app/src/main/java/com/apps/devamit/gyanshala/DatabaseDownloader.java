@@ -29,30 +29,36 @@ class DatabaseDownloader {
                 quesAnswers.clear();
                 questionTitleList.clear();
                 questionDescriptionList.clear();
+                myQuestionTitleList.clear();
+                myQuestionDescriptionList.clear();
+
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
                     QuestionChildren question=snapshot.getValue(QuestionChildren.class);
-                    Log.e("in question :", snapshot.getKey());
+                    //Log.e("in question :", snapshot.getKey());
                     final String[] ques=new String[2];
                     ques[0]=question.q_title;
                     ques[1]=question.q_details;
                     questionTitleList.add(ques[0]);
                     questionDescriptionList.add(ques[1]);
                     if((question.user_id+"@gmail.com").equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
-                        myQuestionTitleList.add(ques[0]);
-                        myQuestionDescriptionList.add(ques[1]);
+                        //if(quesMetadata.get(ques[0]+" "+ques[1])==null||!quesMetadata.get(ques[0]+" "+ques[1]).contains(question.q_id)) {
+                            //Log.e("adding to myques :", "key = "+ques[0]+" "+ques[1]+" qid = "+question.q_id);
+                            myQuestionTitleList.add(ques[0]);
+                            myQuestionDescriptionList.add(ques[1]);
+                        //}
                     }
                     ArrayList<String> metadatas=new ArrayList<>();
                     metadatas.add(question.q_id);
                     metadatas.add(question.user_id);
                     metadatas.add(question.ans_id);
-                    Log.e("putting key :", "as "+ques[0]+" and "+ques[1]);
+                    //Log.e("putting key :", "as "+ques[0]+" and "+ques[1]);
                     quesMetadata.put(ques[0]+" "+ques[1], metadatas);
-                    Log.e("reading databse :", "the read database has ans_id = "+question.ans_id);
+                    Log.e("reading databse :", "the read database has q_id = "+question.q_id);
                     if(!question.ans_id.equals("null")) {
                         for(String x: question.ans_id.split(" ")) {
                             Log.e("Answer child :", x);
                             DatabaseReference refa=mDatabase.getReference("Answers").child(x);
-                            Log.e("looking for :", refa.getKey());
+                            //Log.e("looking for :", refa.getKey());
                             refa.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -62,7 +68,10 @@ class DatabaseDownloader {
                                         ArrayList<String> ansList = quesAnswers.get(ques[0] + " " + ques[1]);
                                         if (ansList == null)
                                             ansList = new ArrayList<>();
-                                        ansList.add(ans+"\n\n-"+answer.user_id);
+                                        //ArrayList<String> ansList =new ArrayList<>();
+                                        if(!ansList.contains(ans+"\n\n-"+answer.user_id))
+                                            ansList.add(ans+"\n\n-"+answer.user_id);
+                                        Log.e("putting ans :", "with ansList size = "+ansList.size()+" and ques = "+ques[0]);
                                         quesAnswers.put(ques[0] + " " + ques[1], ansList);
                                     }
                                 }

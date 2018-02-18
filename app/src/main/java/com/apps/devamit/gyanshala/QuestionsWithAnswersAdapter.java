@@ -40,7 +40,7 @@ public class QuestionsWithAnswersAdapter extends RecyclerView.Adapter<QuestionsW
     public int getItemCount() {
         if(thisQuestionAnswers==null)
             return 0;
-        Log.e("questionansweradapter :", "number of answers = "+thisQuestionAnswers.size());
+        //Log.e("questionansweradapter :", "number of answers = "+thisQuestionAnswers.size());
         return thisQuestionAnswers.size();
     }
 }

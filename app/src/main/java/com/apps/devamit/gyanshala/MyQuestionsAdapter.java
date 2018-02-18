@@ -40,6 +40,7 @@ public class MyQuestionsAdapter extends RecyclerView.Adapter<MyQuestionsAdapter.
 
     @Override
     public int getItemCount() {
+        //Log.e("my questions :", "in adapter with myquestiontitle list size = "+DatabaseDownloader.myQuestionTitleList.size());
         return DatabaseDownloader.myQuestionTitleList.size();
     }
 

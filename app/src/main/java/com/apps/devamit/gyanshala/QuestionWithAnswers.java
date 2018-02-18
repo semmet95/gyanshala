@@ -62,7 +62,9 @@ public class QuestionWithAnswers extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==11) {
-            allAnswers.setAdapter(new QuestionsWithAnswersAdapter(DatabaseDownloader.quesAnswers.get(title + " " + details)));
+            ArrayList<String> ansList=DatabaseDownloader.quesAnswers.get(title+" "+details);
+            //Log.e("ansList size :", ""+ansList.size());
+            allAnswers.setAdapter(new QuestionsWithAnswersAdapter(ansList));
         }
     }
 }

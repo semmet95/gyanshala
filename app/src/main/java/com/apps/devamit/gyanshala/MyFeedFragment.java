@@ -27,7 +27,7 @@ public class MyFeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View layout= inflater.inflate(R.layout.fragment_my_feed, container, false);
-        Log.e("myfeedfragment :", "here in");
+        //Log.e("myfeedfragment :", "here in");
         mRecyclerView=layout.findViewById(R.id.questiononlyrecycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(new MyFeedAdapter());
@@ -35,7 +35,7 @@ public class MyFeedFragment extends Fragment {
     }
 
     void refreshUI() {
-        Log.e("myfeedfragment :", "here in refresh UI");
+        //Log.e("myfeedfragment :", "here in refresh UI");
         mRecyclerView.removeAllViews();
         mRecyclerView.setAdapter(new MyFeedAdapter());
     }

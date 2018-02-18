@@ -38,7 +38,7 @@ public class AnswerActicity extends AppCompatActivity {
         DatabaseReference myref=mDatabase.getReference("Answers"), myref2;
         ArrayList<String> metadata= DatabaseDownloader.quesMetadata.get(answerquestiontitle.getText().toString()+
                 " "+answerquestiondetails.getText().toString());
-        Log.e("tryna add :", "metadata = "+metadata.get(0)+" "+metadata.get(1)+" "+metadata.get(2));
+        //Log.e("tryna add :", "metadata = "+metadata.get(0)+" "+metadata.get(1)+" "+metadata.get(2));
         String user_id= FirebaseAuth.getInstance().getCurrentUser().getEmail();
         user_id=user_id.substring(0, user_id.indexOf('@'));
         AnswerChildren ans=new AnswerChildren(submittedanswer.getText().toString(), user_id);
@@ -54,7 +54,7 @@ public class AnswerActicity extends AppCompatActivity {
         QuestionChildren ques=new QuestionChildren(metadata.get(2), metadata.get(1), metadata.get(0),
                 answerquestiontitle.getText().toString(), answerquestiondetails.getText().toString());
         myref2=mDatabase.getReference("Questions");
-        Log.e("tryna add :", "to database = "+ques.ans_id+" "+ques.q_details+" "+ques.q_id+" "+ques.q_title+" "+ques.user_id);
+        //Log.e("tryna add :", "to database = "+ques.ans_id+" "+ques.q_details+" "+ques.q_id+" "+ques.q_title+" "+ques.user_id);
         myref2.child(metadata.get(0)).setValue(ques);
         finish();
     }
